@@ -18,7 +18,8 @@ const projects = [
     summary: "Rebuilt checkout and added abandoned-cart follow-up.",
     result: "+41%",
     resultLabel: "checkout completion",
-    image: "/images/results/project-1.jpg",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783846532/photo-1612831197310-ff5cf7a211b6_n7f9th.jpg",
     href: "https://example.com",
     span: "lg:col-span-7",
   },
@@ -28,7 +29,8 @@ const projects = [
     summary: "Automated stock and price updates across 1,200 listings.",
     result: "16 hrs",
     resultLabel: "saved every week",
-    image: "/images/results/project-2.jpg",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783153700/smiling-student-holding-notebook-on-busy-school-escalator_hm9i3e.jpg",
     href: "https://example.com",
     span: "lg:col-span-5",
   },
@@ -38,7 +40,8 @@ const projects = [
     summary: "Post-purchase sequences that bring buyers back.",
     result: "+27%",
     resultLabel: "repeat orders",
-    image: "/images/results/project-3.jpg",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783154244/university-student-woman-and-portrait-with-backpack-books-and-happy-for-back-to-school_xf78fh.jpg",
     href: "https://example.com",
     span: "lg:col-span-5",
   },
@@ -48,7 +51,8 @@ const projects = [
     summary: "Fixed a payment-step leak and sped up every product page.",
     result: "-38%",
     resultLabel: "cart abandonment",
-    image: "/images/results/project-4.jpg",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783273126/23557_muizqi.jpgg",
     href: "https://example.com",
     span: "lg:col-span-7",
   },
@@ -209,7 +213,7 @@ export function Results() {
 
   return (
     <section
-      id="results"
+      id="result"
       ref={root}
       className="relative bg-muted/40 py-24 md:py-32"
     >

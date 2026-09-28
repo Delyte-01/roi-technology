@@ -97,11 +97,30 @@ export function LogoMark({ arrowColor = "#FAFAFA", ...props }: LogoMarkProps) {
         </mask>
       </defs>
 
-      <path data-logo-wing="left" fill="#582896" d={WING_LEFT} />
-      <path data-logo-wing="right" fill="#7848B8" d={WING_RIGHT} />
+      <path
+        data-logo-part
+        data-logo-wing="left"
+        pathLength={1}
+        fill="#582896"
+        d={WING_LEFT}
+      />
+      <path
+        data-logo-part
+        data-logo-wing="right"
+        pathLength={1}
+        fill="#7848B8"
+        d={WING_RIGHT}
+      />
 
       {BLADES.map((b) => (
-        <path key={b.key} data-logo-blade fill={b.fill} d={b.d} />
+        <path
+          key={b.key}
+          data-logo-part
+          data-logo-blade
+          pathLength={1}
+          fill={b.fill}
+          d={b.d}
+        />
       ))}
 
       <path

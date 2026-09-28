@@ -1,7 +1,7 @@
 // TODO: replace every placeholder below with your real details.
 export const site = {
   name: "ROI Technology",
-  company: "Your Company Ltd.",
+  company: "ROI Technology.",
   description:
     "We find the hidden problems in your online store, then fix them with smart automation, so you sell more without doing more.",
   // Phone in international format; WhatsApp number is digits only
