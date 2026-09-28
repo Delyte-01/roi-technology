@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* Brand extras: profit (emerald) and leak (rose) */
+  --color-profit: var(--profit);
+  --color-profit-soft: var(--profit-soft);
+  --color-profit-foreground: var(--profit-foreground);
+  --color-leak: var(--leak);
+  --color-leak-soft: var(--leak-soft);
+  --color-brand-deep: var(--brand-deep);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-sora :  var(--font-sora);
+  --font-inter : var(--font-inter)
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Light theme, purple primary */
+  --background: #faf9ff;
+  --foreground: #1e1b2e;
+  --card: #ffffff;
+  --card-foreground: #1e1b2e;
+  --popover: #ffffff;
+  --popover-foreground: #1e1b2e;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --secondary: #f1ecff;
+  --secondary-foreground: #4c1d95;
+  --muted: #f5f1ff;
+  --muted-foreground: #6b6a80;
+  --accent: #ede9fe;
+  --accent-foreground: #4c1d95;
+  --destructive: #e11d48;
+  --border: #e7e1fb;
+  --input: #ddd5f7;
+  --ring: #a78bfa;
+
+  /* Secondary brand color: emerald = profit. Rose = leak. */
+  --profit: #047857;
+  --profit-soft: #d1fae5;
+  --profit-foreground: #ffffff;
+  --leak: #be123c;
+  --leak-soft: #ffe4e6;
+  --brand-deep: #1e1147;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-inter ;
+  }
+}
+
+/* Lenis recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sora);
+}
