@@ -23,7 +23,6 @@ const quickProblems = [
   "Too much manual work",
 ];
 
-// Adds https:// when the visitor types just "yourstore.com"
 function normalizeUrl(value: string) {
   const v = value.trim();
   return /^https?:\/\//i.test(v) ? v : `https://${v}`;
@@ -49,7 +48,7 @@ function Channel({
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={cn(
-        "group flex items-center gap-4 rounded-2xl border p-4 outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "group flex min-w-0 items-center gap-4 rounded-2xl border p-4 outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
         featured
           ? "border-primary/30 bg-primary/5 hover:border-primary/60"
           : "bg-card hover:border-foreground/20 hover:bg-accent/40",
@@ -77,7 +76,6 @@ function Channel({
   );
 }
 
-// No backend: the form just builds a WhatsApp message from what the visitor typed.
 export function Contact() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
@@ -89,15 +87,14 @@ export function Contact() {
     const msg = `Hello, I'm ${name.trim()}. My store: ${normalizeUrl(url)}. My biggest problem: ${problem.trim()}. I'd like a free store check.`;
     const link = whatsappLink(msg);
     window.open(link, "_blank", "noopener,noreferrer");
-    // Keep a fallback link in case the browser blocked the new tab
     setSentLink(link);
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[5fr_6fr] lg:gap-20">
+    <section id="contact" className="overflow-x-hidden py-24 sm:py-32">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[5fr_6fr] lg:gap-20">
         {/* Left: pitch + direct channels */}
-        <div>
+        <div className="min-w-0">
           <h2 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
             What is your store missing? Find out in one free check.
           </h2>
@@ -131,7 +128,7 @@ export function Contact() {
         </div>
 
         {/* Right: form */}
-        <Card className="gap-0 rounded-3xl p-6 shadow-sm sm:p-10">
+        <Card className="min-w-0 gap-0 rounded-3xl p-6 shadow-sm sm:p-10">
           <h3 className="text-2xl font-semibold tracking-tight">
             Tell us about your store
           </h3>
@@ -148,7 +145,7 @@ export function Contact() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ada Okafor"
-                className="h-12 rounded-xl px-4 text-base"
+                className="h-12 w-full min-w-0 rounded-xl px-4 text-base"
               />
             </div>
 
@@ -166,7 +163,7 @@ export function Contact() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="yourstore.com"
-                className="h-12 rounded-xl px-4 text-base"
+                className="h-12 w-full min-w-0 rounded-xl px-4 text-base"
               />
             </div>
 
@@ -186,7 +183,7 @@ export function Contact() {
                       aria-pressed={selected}
                       onClick={() => setProblem(p)}
                       className={cn(
-                        "rounded-full border px-3.5 py-1.5 text-sm outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                        "max-w-full whitespace-normal break-words rounded-full border px-3.5 py-1.5 text-left text-sm outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
                         selected
                           ? "border-primary bg-primary/10 text-foreground"
                           : "text-muted-foreground hover:border-foreground/25 hover:text-foreground",
@@ -204,7 +201,7 @@ export function Contact() {
                 value={problem}
                 onChange={(e) => setProblem(e.target.value)}
                 placeholder="Or describe it in your own words."
-                className="min-h-28 rounded-xl px-4 py-3 text-base"
+                className="min-h-28 w-full min-w-0 rounded-xl px-4 py-3 text-base"
               />
             </div>
 
@@ -221,7 +218,7 @@ export function Contact() {
             {sentLink && (
               <p
                 role="status"
-                className="rounded-xl border border-profit/30 bg-profit/10 px-4 py-3 text-sm"
+                className="break-words rounded-xl border border-profit/30 bg-profit/10 px-4 py-3 text-sm"
               >
                 WhatsApp should have opened in a new tab.{" "}
                 <a
