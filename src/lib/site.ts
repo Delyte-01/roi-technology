@@ -7,7 +7,7 @@ export const site = {
   // Phone in international format; WhatsApp number is digits only
   phone: "08088103400",
   whatsapp: "+2348088103400",
-  email: "roismarttechnologiesltd@gmail.com",
+  email: "Paul@roitechnology.com.ng",
   currency: "USD" as const,
   locale: "en-US",
 };
