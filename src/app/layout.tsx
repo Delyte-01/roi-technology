@@ -4,6 +4,7 @@ import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import "lenis/dist/lenis.css";
 
 import "./globals.css";
+import { Toaster } from "sonner";
 
 
 const sora = Sora({
@@ -38,7 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sora.variable} ${inter.variable} antialiased`}>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          <Toaster richColors position="top-right" />
+        </SmoothScroll>
       </body>
     </html>
   );

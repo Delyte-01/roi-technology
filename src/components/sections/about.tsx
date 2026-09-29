@@ -192,7 +192,7 @@ export function Origin() {
 
   return (
     <section
-      id="story"
+      id="origin"
       ref={root}
       className="relative bg-muted/40 py-24 md:py-32"
     >

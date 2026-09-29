@@ -185,7 +185,7 @@ export function Header() {
       data-scrolled="false"
       className="group fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4"
     >
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border border-transparent px-4 transition-[background-color,border-color,box-shadow,backdrop-filter,max-width,padding] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:h-16 sm:px-6 group-data-[scrolled=true]:max-w-5xl group-data-[scrolled=true]:border-border/70 group-data-[scrolled=true]:bg-background/70 group-data-[scrolled=true]:shadow-lg group-data-[scrolled=true]:shadow-primary/5 group-data-[scrolled=true]:backdrop-blur-xl group-data-[scrolled=true]:backdrop-saturate-150">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border border-transparent px-4 transition-[background-color,border-color,box-shadow,backdrop-filter,max-width,padding] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:h-16 sm:px-6 group-data-[scrolled=true]:max-w-6xl group-data-[scrolled=true]:border-border/70 group-data-[scrolled=true]:bg-background/70 group-data-[scrolled=true]:shadow-lg group-data-[scrolled=true]:shadow-primary/5 group-data-[scrolled=true]:backdrop-blur-xl group-data-[scrolled=true]:backdrop-saturate-150">
         <Logo />
 
         <nav
