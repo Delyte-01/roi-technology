@@ -79,17 +79,50 @@ function Channel({
 export function Contact() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
+  const [email, setEmail] = useState("");
   const [problem, setProblem] = useState("");
   const [sentLink, setSentLink] = useState<string | null>(null);
 
-  function send(e: React.FormEvent) {
-    e.preventDefault();
-    const msg = `Hello, I'm ${name.trim()}. My store: ${normalizeUrl(url)}. My biggest problem: ${problem.trim()}. I'd like a free store check.`;
+async function send(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+
+  const formData = new FormData();
+
+  formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY!);
+
+  formData.append("name", name.trim());
+  formData.append("email", email.trim());
+  formData.append("store", normalizeUrl(url));
+  formData.append("problem", problem.trim());
+
+  formData.append("subject", `New Store Check Request from ${name.trim()}`);
+
+  formData.append("from_name", "ROI Technology Website");
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      console.error("Web3Forms error:", result);
+      return;
+    }
+
+    // WhatsApp
+    const msg = `Hello, I'm ${name.trim()}. My email: ${email.trim()}. My store: ${normalizeUrl(url)}. My biggest problem: ${problem.trim()}. I'd like a free store check.`;
+
     const link = whatsappLink(msg);
+
     window.open(link, "_blank", "noopener,noreferrer");
     setSentLink(link);
+  } catch (error) {
+    console.error("Submission error:", error);
   }
-
+}
   return (
     <section id="contact" className="overflow-x-hidden py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[5fr_6fr] lg:gap-20">
@@ -148,7 +181,20 @@ export function Contact() {
                 className="h-12 w-full min-w-0 rounded-xl px-4 text-base"
               />
             </div>
-
+            <div className="space-y-2">
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="h-12 w-full min-w-0 rounded-xl px-4 text-base"
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="url">Store link</Label>
               <Input

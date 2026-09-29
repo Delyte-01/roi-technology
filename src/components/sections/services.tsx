@@ -171,7 +171,7 @@ export function Services() {
                 <span className="block text-xs text-muted-foreground">
                   Service
                 </span>
-                <span className="block truncate font-semibold">
+                <span className="block truncate font-semibold capitalize">
                   {current.name}
                 </span>
               </span>
@@ -267,7 +267,7 @@ export function Services() {
                 ref={(el) => {
                   triggers.current[s.id] = el;
                 }}
-                className="relative z-10 h-10 flex-none gap-2 rounded-full border-transparent px-4 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-transparent [&_svg]:transition-colors data-[state=active]:[&_svg]:text-primary"
+                className="relative z-10 h-10 flex-none gap-2 rounded-full border-transparent px-4 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-transparent [&_svg]:transition-colors data-[state=active]:[&_svg]:text-primary capitalize"
               >
                 <s.icon className="size-4" aria-hidden />
                 {s.name}

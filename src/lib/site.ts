@@ -6,7 +6,7 @@ export const site = {
     "We find the hidden problems in your online store, then fix them with smart automation, so you sell more without doing more.",
   // Phone in international format; WhatsApp number is digits only
   phone: "08088103400",
-  whatsapp: "+2348088103400",
+  whatsapp: "+2348139760048",
   email: "roismarttechnologiesltd@gmail.com",
   currency: "USD" as const,
   locale: "en-US",

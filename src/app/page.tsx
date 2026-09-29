@@ -9,18 +9,22 @@ import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { Results } from "@/components/sections/results";
 import { PageLoader } from "@/components/page-loader";
+import { Credentials } from "@/components/sections/crendentials";
+import { Origin } from "@/components/sections/about";
 
 export default function Home() {
   return (
     <>
       <PageLoader />
       <Header />
-      <main >
+      <main>
         <Hero />
         <Problem />
         <Steps />
         <Results />
         <Services />
+        <Origin />
+        <Credentials />
         <Faq />
         <Contact />
       </main>
