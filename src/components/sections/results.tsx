@@ -10,68 +10,72 @@ import { gsap, useGSAP } from "@/lib/gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 // Placeholder content: replace names, numbers, images and links with your real projects.
-// Images go in /public/images/results/ (about 1000x1250px, portrait works best for this grid).
+// Images are desktop screenshots. Any size works: the card crops to a landscape
+// frame from the top of the page, and tall full-page shots slowly scroll on hover.
 const projects = [
   {
-    name: "Atelier Nova",
+    name: "ZARA",
     category: "Fashion · Shopify",
     result: "+41%",
     resultLabel: "checkout completion",
     image:
-      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783846532/photo-1612831197310-ff5cf7a211b6_n7f9th.jpg",
-    href: "https://example.com",
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790692449/Screenshot_from_2026-09-29_15-33-26_fdbuuh.png",
+    href: "https://www.zara.com/uk/",
   },
   {
-    name: "Greenleaf Supply",
-    category: "Home goods · WordPress",
+    name: "UNIMATIC WATCHES",
+    category: "Time pieces · WordPress",
     result: "16 hrs",
     resultLabel: "saved every week",
     image:
-      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783153700/smiling-student-holding-notebook-on-busy-school-escalator_hm9i3e.jpg",
-    href: "https://example.com",
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790693604/Screenshot_from_2026-09-29_15-52-51_lcvbs4.png",
+    href: "https://www.unimaticwatches.com/",
   },
   {
-    name: "Kola & Co",
-    category: "Beauty · Shopify",
+    name: "COCOON BLANKET",
+    category: "Home · Shopify",
     result: "+27%",
     resultLabel: "repeat orders",
     image:
-      "https://res.cloudinary.com/dk5mfu099/image/upload/v1783154244/university-student-woman-and-portrait-with-backpack-books-and-happy-for-back-to-school_xf78fh.jpg",
-    href: "https://example.com",
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790693745/Screenshot_from_2026-09-29_15-55-27_dw2veb.png",
+    href: "https://www.cocoonblanket.com/",
   },
   {
-    name: "Northwind Tools",
-    category: "Hardware · WooCommerce",
+    name: "THEIR NIBS",
+    category: "Home · WooCommerce",
     result: "-38%",
     resultLabel: "cart abandonment",
-    image: "/images/results/project-4.jpg",
-    href: "https://example.com",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790693881/Screenshot_from_2026-09-29_15-57-30_oz1hb0.png",
+    href: "https://www.theirnibs.com/en-us",
   },
   {
-    name: "Harbor & Hearth",
-    category: "Furniture · Shopify",
+    name: "VILLA AURELIA",
+    category: "Shopify",
     result: "+19%",
     resultLabel: "average order value",
-    image: "/images/results/project-5.jpg",
-    href: "https://example.com",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790693970/Screenshot_from_2026-09-29_15-59-13_rfyaj1.png",
+    href: "https://hotelaurelia.online/",
   },
   {
-    name: "Pure Botanics",
-    category: "Skincare · WordPress",
+    name: "LITTLE ONE SHOP",
+    category: "Kids · WordPress",
     result: "+52%",
     resultLabel: "email revenue",
-    image: "/images/results/project-6.jpg",
-    href: "https://example.com",
-  },
-  {
-    name: "Fieldstone Coffee",
-    category: "Food & drink · Shopify",
-    result: "12 hrs",
-    resultLabel: "saved every week",
-    image: "/images/results/project-7.jpg",
-    href: "https://example.com",
+    image:
+      "https://res.cloudinary.com/dk5mfu099/image/upload/v1790694438/Screenshot_from_2026-09-29_16-06-59_kfde4w.png",
+    href: "https://littleoneshop.com",
   },
 ];
+
+function hostOf(href: string) {
+  try {
+    return new URL(href).hostname.replace(/^www\./, "");
+  } catch {
+    return href;
+  }
+}
 
 export function Results() {
   const root = useRef<HTMLElement>(null);
@@ -100,8 +104,7 @@ export function Results() {
           })
           .from("[data-r-fade]", { opacity: 0, y: 20, duration: 0.9 }, "-=0.7");
 
-        // Cards reveal in row-batches as they scroll into view: a clean,
-        // uniform rise rather than a per-card scrub, since every card is the same size.
+        // Cards reveal in row-batches as they scroll into view.
         ScrollTrigger.batch("[data-project]", {
           start: "top 90%",
           once: true,
@@ -168,51 +171,73 @@ export function Results() {
           </p>
         </div>
 
-        {/* Uniform, responsive grid */}
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-16 md:gap-7 lg:grid-cols-3 xl:grid-cols-4">
+        {/* 1 column on phones, 2 on tablets, 3 on desktop */}
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-16 md:gap-6 lg:grid-cols-3">
           {projects.map((p) => (
-            <article key={p.name} data-project>
+            <article key={p.name} data-project className="min-w-0">
               <a
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${p.name}: visit project (opens in a new tab)`}
-                className="group block h-full overflow-hidden rounded-[1.5rem] border bg-card shadow-sm outline-offset-4 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm outline-offset-4 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
               >
-                {/* Image */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+                {/* Browser frame: tells the eye this is a website, not a photo */}
+                <div
+                  aria-hidden
+                  className="flex items-center gap-3 border-b bg-muted/60 px-3.5 py-2.5"
+                >
+                  <span className="flex shrink-0 gap-1.5">
+                    <i className="size-2 rounded-full bg-foreground/15" />
+                    <i className="size-2 rounded-full bg-foreground/15" />
+                    <i className="size-2 rounded-full bg-foreground/15" />
+                  </span>
+                  <span className="min-w-0 flex-1 truncate rounded-md bg-background/80 px-2.5 py-0.5 text-center text-[11px] text-muted-foreground">
+                    {hostOf(p.href)}
+                  </span>
+                </div>
+
+                {/* Screenshot: landscape frame, anchored to the top of the page */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                   <Image
                     src={p.image}
                     alt={`${p.name} website preview`}
                     fill
-                    sizes="(min-width: 1280px) 23vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
-                    className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                    sizes="(min-width: 1280px) 384px, (min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
+                    className="object-cover [object-position:50%_0%] transition-[object-position] duration-[3500ms] ease-in-out group-hover:[object-position:50%_100%] motion-reduce:transition-none"
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent"
                   />
 
-                  {/* Corner arrow */}
-                  <span className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-background/85 text-foreground backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-45 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:-rotate-45" />
-                  </span>
-
-                  {/* Result, overlaid on the image so every card stays the same height */}
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <p className="text-xl font-semibold tabular-nums text-white">
+                  {/* Result badge */}
+                  <div className="absolute bottom-3 left-3 flex items-baseline gap-2 rounded-xl bg-background/90 px-3 py-2 shadow-sm backdrop-blur-md">
+                    <span className="text-lg font-semibold tabular-nums leading-none text-primary">
                       {p.result}
-                    </p>
-                    <p className="text-xs text-white/75">{p.resultLabel}</p>
+                    </span>
+                    <span className="text-xs leading-none text-muted-foreground">
+                      {p.resultLabel}
+                    </span>
                   </div>
                 </div>
 
                 {/* Text */}
-                <div className="p-4">
-                  <p className="text-xs text-muted-foreground">{p.category}</p>
-                  <h3 className="mt-0.5 truncate text-base font-semibold tracking-tight transition-colors duration-300 group-hover:text-primary">
-                    {p.name}
-                  </h3>
+                <div className="flex items-center justify-between gap-4 p-4">
+                  <div className="min-w-0">
+                    <h3 className="truncate text-base font-semibold tracking-tight transition-colors duration-300 group-hover:text-primary">
+                      {p.name}
+                    </h3>
+                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
+                      {p.category}
+                    </p>
+                  </div>
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full border text-foreground transition-colors duration-500 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </span>
                 </div>
               </a>
             </article>
