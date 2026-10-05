@@ -37,8 +37,12 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-sora :  var(--font-sora);
-  --font-inter : var(--font-inter)
+  --font-sora: var(--font-sora);
+  --font-inter: var(--font-inter);
+
+  --color-shopify: var(--shopify);
+  --color-shopify-deep: var(--shopify-deep);
+  --color-shopify-soft: var(--shopify-soft);
 }
 
 :root {
@@ -71,6 +75,13 @@
   --leak: #be123c;
   --leak-soft: #ffe4e6;
   --brand-deep: #1e1147;
+
+
+  /* in :root */
+/* Platform accent: Shopify/ecommerce labeling only. Never for primary UI. */
+--shopify: #95bf47;       /* bright, for dark purple backgrounds */
+--shopify-deep: #4f7a28;  /* darker, for text/icons on light backgrounds */
+--shopify-soft: #f0f7e0;  /* badge/tint backgrounds */
 }
 
 @layer base {
@@ -81,7 +92,7 @@
     scroll-behavior: auto;
   }
   body {
-    @apply bg-background text-foreground antialiased font-inter ;
+    @apply bg-background text-foreground antialiased font-inter;
   }
 }
 

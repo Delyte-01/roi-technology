@@ -1,41 +1,21 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight, Clock, TrendingDown, TrendingUp } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ClipboardCheck,
+  Store,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 
-const auditRows = [
-  {
-    icon: TrendingDown,
-    title: "Checkout leak",
-    detail: "68 of 100 buyers drop off at payment",
-    count: 34,
-    prefix: "-",
-    suffix: "%",
-    tone: "leak" as const,
-  },
-  {
-    icon: Clock,
-    title: "Manual busywork",
-    detail: "Stock and price updates done by hand",
-    count: 14,
-    prefix: "",
-    suffix: " hrs/wk",
-    tone: "leak" as const,
-  },
-  {
-    icon: TrendingUp,
-    title: "Automated fix",
-    detail: "Checkout and follow-up sequences ready",
-    count: 28,
-    prefix: "+",
-    suffix: "%",
-    tone: "profit" as const,
-  },
-];
+// Platforms we work on. Plain text on purpose: no official logos, no partner claims.
+const platforms = ["Shopify", "WordPress", "WooCommerce"];
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -45,13 +25,7 @@ export function Hero() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const counters = gsap.utils.toArray<HTMLElement>("[data-count]");
-
-        counters.forEach((el) => {
-          el.textContent = `${el.dataset.prefix ?? ""}0${el.dataset.suffix ?? ""}`;
-        });
-
-        // CHANGED: start paused so nothing plays behind the loader
+        // Starts paused so nothing plays behind the loader
         const tl = gsap.timeline({
           paused: true,
           defaults: { ease: "expo.out" },
@@ -82,58 +56,12 @@ export function Hero() {
             "-=1.25",
           )
           .from(
-            "[data-card-head]",
-            { opacity: 0, y: 12, duration: 0.8 },
-            "-=0.9",
-          )
-          .from(
-            "[data-bar-paid]",
-            {
-              scaleX: 0,
-              transformOrigin: "0% 50%",
-              duration: 1.1,
-              ease: "power4.out",
-            },
-            "-=0.6",
-          )
-          .from(
-            "[data-bar-leak]",
-            {
-              scaleX: 0,
-              transformOrigin: "0% 50%",
-              duration: 1.4,
-              ease: "power4.inOut",
-            },
+            "[data-float]",
+            { opacity: 0, y: 16, duration: 0.9, stagger: 0.12 },
             "-=0.7",
-          )
-          .from(
-            "[data-bar-label]",
-            { opacity: 0, y: 8, duration: 0.7, stagger: 0.1 },
-            "-=0.9",
-          )
-          .from(
-            "[data-audit-row]",
-            { opacity: 0, x: 32, duration: 0.9, stagger: 0.12 },
-            "-=1.1",
           );
 
-        counters.forEach((el, i) => {
-          const state = { v: 0 };
-          tl.to(
-            state,
-            {
-              v: Number(el.dataset.count),
-              duration: 1.6,
-              ease: "power3.out",
-              onUpdate: () => {
-                el.textContent = `${el.dataset.prefix ?? ""}${Math.round(state.v)}${el.dataset.suffix ?? ""}`;
-              },
-            },
-            i === 0 ? "-=1.2" : "<0.12",
-          );
-        });
-
-        // NEW: wait for the loader, then play
+        // Wait for the loader, then play
         const start = () => tl.play();
         let fallback = 0;
 
@@ -141,19 +69,9 @@ export function Hero() {
           start(); // loader already finished (e.g. returning visitor)
         } else {
           window.addEventListener("loader:done", start, { once: true });
-          // Safety net: if there is no loader on this page, never leave the hero hidden
+          // Safety net: never leave the hero hidden if there is no loader
           fallback = window.setTimeout(start, 10000);
         }
-
-        // Ambient glow drift (starts immediately, it's hidden behind the loader anyway)
-        gsap.to("[data-glow]", {
-          x: 60,
-          y: 30,
-          duration: 9,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        });
 
         const cleanups: Array<() => void> = [];
         const hoverMM = gsap.matchMedia();
@@ -180,6 +98,17 @@ export function Hero() {
               const py = (e.clientY - r.top) / r.height - 0.5;
               ry(px * 7);
               rx(py * -7);
+
+              // Feeds the cursor-following glare
+              const c = card.getBoundingClientRect();
+              card.style.setProperty(
+                "--mx",
+                `${((e.clientX - c.left) / c.width) * 100}%`,
+              );
+              card.style.setProperty(
+                "--my",
+                `${((e.clientY - c.top) / c.height) * 100}%`,
+              );
             };
             const leave = () => {
               rx(0);
@@ -228,7 +157,6 @@ export function Hero() {
         return () => {
           cleanups.forEach((fn) => fn());
           hoverMM.revert();
-          // NEW: remove the loader listener and safety timer
           window.removeEventListener("loader:done", start);
           window.clearTimeout(fallback);
         };
@@ -236,14 +164,24 @@ export function Hero() {
     },
     { scope: root },
   );
+
   return (
     <section id="home" ref={root} className="relative isolate overflow-hidden">
-      {/* Backdrop: faint grid that fades out, plus one soft glow */}
-
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-24 md:py-35 sm:px-8  lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 ">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-24 sm:px-8 md:py-35 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         {/* Copy */}
         <div>
-          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[5rem]">
+          {/* Platform badge: first (and quietest) use of the Shopify green */}
+          <div data-fade className="mb-7">
+            <Badge
+              variant="outline"
+              className="h-auto gap-2 rounded-full border-shopify/40 bg-shopify-soft px-3.5 py-1.5 text-sm font-medium text-shopify"
+            >
+              <Store className="size-4" aria-hidden />
+              Shopify &amp; WordPress ecommerce specialists
+            </Badge>
+          </div>
+
+          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem]">
             <span className="block overflow-hidden pb-[0.12em]">
               <span data-line className="block will-change-transform">
                 We see what&apos;s
@@ -266,10 +204,11 @@ export function Hero() {
 
           <p
             data-fade
-            className="mt-8 max-w-md text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed"
+            className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed"
           >
-            We find the hidden problems in your online store, then fix them with
-            smart automation, so you sell more without doing more.
+            We find hidden problems in your Shopify or WordPress store and fix
+            them, from conversion leaks to performance issues, so more visitors
+            become customers.
           </p>
 
           <div data-fade className="mt-10 flex flex-wrap items-center gap-4">
@@ -291,14 +230,36 @@ export function Hero() {
               data-magnetic
               className="h-13 rounded-full px-6 text-base will-change-transform"
             >
-              <a href="#">See how much you&apos;re losing</a>
+              {/* Same target as the primary CTA until a separate store-check section exists */}
+              <a href="#contact">See what&apos;s costing my store</a>
             </Button>
           </div>
 
-          <p data-fade className="mt-6 text-sm text-muted-foreground">
-            Takes 2 minutes. No obligation. Built for Shopify and WordPress
-            stores.
-          </p>
+          {/* Platform strip: reads as a specialization, not a tech list */}
+          <div data-fade className="mt-10 border-t border-border pt-6">
+            <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+              <Store className="size-3.5 text-shopify-deep" aria-hidden />
+              Built for
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+              {platforms.map((name) => (
+                <li
+                  key={name}
+                  className="flex items-center gap-2 text-base font-medium text-foreground"
+                >
+                  <Check
+                    className="size-4 text-shopify-deep"
+                    strokeWidth={3}
+                    aria-hidden
+                  />
+                  {name}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Free, takes 2 minutes, no obligation.
+            </p>
+          </div>
         </div>
 
         {/* Audit panel */}
@@ -318,7 +279,7 @@ export function Hero() {
                 width={500}
                 height={500}
                 priority
-                className="object-cover w-full  h-full transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                className="h-full w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
               />
             </div>
 
@@ -328,7 +289,7 @@ export function Hero() {
               className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"
             />
 
-            {/* Cursor-following glare */}
+            {/* Cursor-following glare (--mx / --my are set in the hover handler) */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -338,10 +299,18 @@ export function Hero() {
               }}
             />
 
-            {/* Floating chips (different depths for parallax) */}
+            {/* Store audit pill (Shopify green accent) */}
             <div
               data-float
-              data-depth="26"
+              className="absolute right-5 top-5 flex items-center gap-2 rounded-full border border-shopify/40 bg-shopify-soft px-3.5 py-2 text-sm font-medium text-shopify-deep shadow-lg sm:right-6 sm:top-6"
+            >
+              <ClipboardCheck className="size-4" aria-hidden />
+              Store audit
+            </div>
+
+            {/* Floating chips: audit -> leak -> fix -> results */}
+            <div
+              data-float
               className="absolute left-5 top-5 flex items-center gap-3 rounded-2xl border border-white/20 bg-background/80 px-4 py-3 shadow-xl backdrop-blur-md sm:left-6 sm:top-6"
             >
               <span className="grid size-9 place-items-center rounded-lg bg-leak-soft text-leak">
@@ -357,7 +326,6 @@ export function Hero() {
 
             <div
               data-float
-              data-depth="42"
               className="absolute bottom-5 right-5 flex items-center gap-3 rounded-2xl border border-white/20 bg-background/80 px-4 py-3 shadow-xl backdrop-blur-md sm:bottom-6 sm:right-6"
             >
               <span className="grid size-9 place-items-center rounded-lg bg-profit-soft text-profit">
@@ -367,6 +335,22 @@ export function Hero() {
                 <p className="text-sm font-medium">Automated fix</p>
                 <p className="text-sm font-semibold tabular-nums text-profit">
                   +28%
+                </p>
+              </div>
+            </div>
+
+            {/* Results chip: hidden on mobile so it can't collide with the fix chip */}
+            <div
+              data-float
+              className="absolute bottom-5 left-5 hidden items-center gap-3 rounded-2xl border border-white/20 bg-background/80 px-4 py-3 shadow-xl backdrop-blur-md sm:bottom-6 sm:left-6 sm:flex"
+            >
+              <span className="grid size-9 place-items-center rounded-lg bg-shopify-soft text-shopify-deep">
+                <Check className="size-4" strokeWidth={3} />
+              </span>
+              <div className="leading-tight">
+                <p className="text-sm font-medium">Results</p>
+                <p className="text-sm font-semibold text-shopify-deep">
+                  Improving
                 </p>
               </div>
             </div>

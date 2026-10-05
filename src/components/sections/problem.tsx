@@ -4,9 +4,11 @@ import { useRef } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  Check,
   Hourglass,
   Moon,
   ShoppingCart,
+  Store,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,13 +21,13 @@ const problems = [
   {
     icon: ShoppingCart,
     title: "Where did that sale go?",
-    body: "Most shoppers leave right before they buy, and you never find out why.",
+    body: "Shoppers fill their cart, then leave at checkout. Without an audit, you never find out why.",
     impact: "Lost checkout revenue, every day",
   },
   {
     icon: Hourglass,
     title: "There's never enough time.",
-    body: "Updating listings, prices and stock by hand eats hours you don't have.",
+    body: "Updating products, prices and stock by hand eats hours you don't have.",
     impact: "Hours lost to repetitive work",
   },
   {
@@ -176,9 +178,19 @@ export function Problem() {
                 </span>
               ))}
             </h2>
+
+            {/* Platform context: the only green on this side of the section */}
+            <p className="mt-8 flex max-w-sm items-start gap-3 text-base leading-relaxed text-muted-foreground">
+              <Store
+                className="mt-1 size-5 shrink-0 text-shopify-deep"
+                aria-hidden
+              />
+              It happens on Shopify and WordPress stores every day. Here&apos;s
+              where it usually starts.
+            </p>
           </div>
 
-          {/* Problems */}
+          {/* Problems (stay rose: this section is about leaks) */}
           <ul data-list className="border-t">
             {problems.map((p) => (
               <li key={p.title} data-row className="border-b">
@@ -194,16 +206,16 @@ export function Problem() {
                   </span>
 
                   <div className="relative min-w-0 flex-1">
-                    <h3 className="text-2xl font-semibold leading-snug tracking-tight transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
+                    <h3 className="text-[20px] font-semibold leading-snug tracking-tight transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
                       {p.title}
                     </h3>
-                    <p className="mt-2 max-w-md text-base leading-relaxed text-muted-foreground">
+                    <p className="mt-2  text-[14px] leading-relaxed text-muted-foreground">
                       {p.body}
                     </p>
                   </div>
 
                   <div className="relative flex items-center gap-3 md:max-w-[15rem] md:flex-col md:items-end md:gap-4">
-                    <p className="rounded-full bg-leak-soft px-4 py-2 text-[10px] font-medium text-leak md:text-right">
+                    <p className="rounded-full bg-leak-soft px-4 py-2 text-[12px] font-medium leading-snug text-leak md:text-right">
                       {p.impact}
                     </p>
                     <ArrowUpRight className="hidden size-5 text-muted-foreground opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground group-hover:opacity-100 md:block" />
@@ -214,34 +226,60 @@ export function Problem() {
           </ul>
         </div>
 
-        {/* CTA panel */}
+        {/* CTA panel: solid brand-deep instead of a gradient */}
         <div
           data-cta
-          className="relative mt-20 overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary to-violet-500 p-8 text-primary-foreground sm:p-12 lg:mt-28 lg:p-16"
+          className="relative mt-20 overflow-hidden rounded-[2rem] bg-brand-deep p-8 text-white sm:p-12 lg:mt-28 lg:p-16"
         >
+          {/* Purple cursor-following glow */}
           <div
             aria-hidden
             data-cta-glow
-            className="pointer-events-none absolute left-1/2 top-1/2 size-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/25 blur-[90px]"
+            className="pointer-events-none absolute left-1/2 top-1/2 size-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40 blur-[100px]"
           />
+          {/* Faint grid */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000,transparent)]"
+            className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000,transparent)]"
           />
 
           <div className="relative flex flex-col items-start justify-between gap-10 md:flex-row md:items-center">
-            <p
-              data-cta-item
-              className="max-w-xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
-            >
-              Want to find out where your store is leaking?
-            </p>
+            <div className="max-w-xl">
+              <p
+                data-cta-item
+                className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl"
+              >
+                Want to find out where your store is leaking?
+              </p>
+              <ul
+                data-cta-item
+                className="mt-6 flex flex-col gap-2 text-base text-white/80"
+              >
+                <li className="flex items-center gap-2.5">
+                  <Check
+                    className="size-4 shrink-0 text-shopify"
+                    strokeWidth={3}
+                    aria-hidden
+                  />
+                  Free for Shopify, WordPress and WooCommerce stores
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check
+                    className="size-4 shrink-0 text-shopify"
+                    strokeWidth={3}
+                    aria-hidden
+                  />
+                  Takes 2 minutes
+                </li>
+              </ul>
+            </div>
+
             <div data-cta-item data-magnetic className="will-change-transform">
               <Button
                 asChild
                 variant="secondary"
                 size="lg"
-                className="group/cta h-14 rounded-full px-8 text-base"
+                className="group/cta h-14 rounded-full bg-white px-8 text-base text-brand-deep transition-colors duration-300 hover:bg-shopify-soft"
               >
                 <a href="#contact">
                   Check my store now

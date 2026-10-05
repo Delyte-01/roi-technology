@@ -1,28 +1,39 @@
 "use client";
 
 import { useRef } from "react";
+import { ArrowRight, Store } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
+// "stage" maps each step to the journey: Problem (previous section) -> Audit -> Fix -> Optimize -> Grow
 const steps = [
   {
+    stage: "Audit",
     title: "We look",
-    body: "We go through your store the way a customer would and find where you lose sales or waste time.",
+    body: "We go through your Shopify or WordPress store the way a customer would and find where you lose sales or waste time.",
     result: "A ranked list of leaks",
+    tone: "brand" as const,
   },
   {
-    title: "We think",
-    body: "We pick the smart tools that matter most: product pages, pricing and follow-up.",
-    result: "A short, focused plan",
+    stage: "Fix",
+    title: "We fix",
+    body: "We start with the biggest leaks: checkout, product pages and store setup, so the wins show up early.",
+    result: "Your top leaks closed",
+    tone: "brand" as const,
   },
   {
+    stage: "Optimize",
     title: "We automate",
     body: "We set up checkout, listings and follow-ups to run without you, correctly, every time.",
     result: "Live automations",
+    tone: "brand" as const,
   },
   {
+    stage: "Grow",
     title: "You profit",
     body: "Everything is judged by one question: did it make you more money? We report the numbers weekly.",
     result: "A weekly numbers report",
+    tone: "profit" as const,
   },
 ];
 
@@ -96,7 +107,7 @@ export function Steps() {
 
   return (
     <section id="how-it-works" ref={root} className="relative py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-[5fr_7fr] lg:gap-20">
+      <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[5fr_7fr] lg:gap-20">
         {/* Left: sticky heading + live progress */}
         <div className="lg:sticky lg:top-28 lg:self-start">
           <h2 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -105,6 +116,10 @@ export function Steps() {
           <p className="mt-5 max-w-md text-pretty text-lg text-muted-foreground">
             No long projects and no guesswork. Every step ends with something
             you can see working.
+          </p>
+          <p className="mt-5 flex max-w-md items-center gap-3 text-base text-muted-foreground">
+            <Store className="size-5 shrink-0 text-shopify-deep" aria-hidden />
+            Works on Shopify, WordPress and WooCommerce stores.
           </p>
 
           <div className="mt-10 hidden max-w-xs lg:block" aria-hidden>
@@ -158,24 +173,49 @@ export function Steps() {
                   {i + 1}
                 </span>
 
-                <div className="rounded-2xl border border-transparent p-6 opacity-40 transition-all duration-500 group-data-[state=current]/step:border-border group-data-[state=current]/step:bg-card group-data-[state=current]/step:opacity-100 group-data-[state=current]/step:shadow-lg group-data-[state=current]/step:shadow-black/5 group-data-[state=done]/step:opacity-70">
-                  <h3 className="text-2xl font-semibold tracking-tight">
+                <div className="rounded-2xl border border-transparent p-6 opacity-60 transition-all duration-500 group-data-[state=current]/step:border-border group-data-[state=current]/step:bg-card group-data-[state=current]/step:opacity-100 group-data-[state=current]/step:shadow-lg group-data-[state=current]/step:shadow-black/5 group-data-[state=done]/step:opacity-80">
+                  <p className="text-sm font-medium text-primary">{s.stage}</p>
+                  <h3 className="mt-1 text-2xl font-semibold tracking-tight">
                     {s.title}
                   </h3>
                   <p className="mt-2 max-w-xl text-pretty text-muted-foreground">
                     {s.body}
                   </p>
-                  <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-sm text-foreground/80">
-                    <span
-                      aria-hidden
-                      className="size-1.5 rounded-full bg-primary"
-                    />
-                    {s.result}
-                  </p>
+                  {s.tone === "profit" ? (
+                    <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-profit/30 bg-profit-soft px-3 py-1 text-sm font-medium text-profit">
+                      <span
+                        aria-hidden
+                        className="size-1.5 rounded-full bg-profit"
+                      />
+                      {s.result}
+                    </p>
+                  ) : (
+                    <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-sm text-foreground/80">
+                      <span
+                        aria-hidden
+                        className="size-1.5 rounded-full bg-primary"
+                      />
+                      {s.result}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}
           </ol>
+
+          {/* Next action */}
+          <div className="mt-10 pl-16">
+            <Button
+              asChild
+              size="lg"
+              className="group h-13 rounded-full px-7 text-base"
+            >
+              <a href="#contact">
+                Start with step one: free store check
+                <ArrowRight className="size-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

@@ -11,6 +11,9 @@ import { Results } from "@/components/sections/results";
 import { PageLoader } from "@/components/page-loader";
 import { Credentials } from "@/components/sections/crendentials";
 import { Origin } from "@/components/sections/about";
+import ShopifyWordPressServices from "@/components/sections/wpWebservices";
+import PlatformExpertise from "@/components/sections/platformexpertise";
+
 
 export default function Home() {
   return (
@@ -20,7 +23,9 @@ export default function Home() {
       <main>
         <Hero />
         <Problem />
+        <ShopifyWordPressServices />
         <Steps />
+       <PlatformExpertise />
         <Results />
         <Services />
         <Origin />

@@ -2,8 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "export",
+
   allowedDevOrigins: ["192.168.43.22"],
   images: {
+    unoptimized: true,
     remotePatterns: [
       // Cloudinary
       {
