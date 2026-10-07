@@ -171,7 +171,7 @@ export function Hero() {
         {/* Copy */}
         <div>
           {/* Platform badge: first (and quietest) use of the Shopify green */}
-          <div data-fade className="mb-7 ">
+          <div data-fade className="mb-7">
             <Badge
               variant="outline"
               className="h-auto gap-2 rounded-full border-shopify/40 bg-shopify-soft px-3.5 py-1.5 text-sm font-medium text-shopify"
@@ -181,7 +181,7 @@ export function Hero() {
             </Badge>
           </div>
 
-          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem] text-center lg:text-left">
+          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem]">
             <span className="block overflow-hidden pb-[0.12em]">
               <span data-line className="block will-change-transform">
                 We see what&apos;s
@@ -204,7 +204,7 @@ export function Hero() {
 
           <p
             data-fade
-            className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed text-center lg:text-left"
+            className="mt-5 max-w-xl text-[16px] leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed"
           >
             We find hidden problems in your Shopify or WordPress store and fix
             them, from conversion leaks to performance issues, so more visitors
@@ -213,13 +213,13 @@ export function Hero() {
 
           <div
             data-fade
-            className="mt-10 flex flex-wrap justify-center items-center gap-4"
+            className="mt-10 flex flex-col px-4  gap-4 sm:flex-row sm:flex-wrap sm:items-center"
           >
             <Button
               asChild
               size="lg"
               data-magnetic
-              className="group h-13 rounded-full px-7 text-base will-change-transform"
+              className="group h-13 w-full rounded-full px-7 text-base will-change-transform sm:w-auto"
             >
               <a href="#contact">
                 Get my free store check
@@ -231,13 +231,11 @@ export function Hero() {
               size="lg"
               variant="outline"
               data-magnetic
-              className="h-13 rounded-full px-6 text-base will-change-transform"
+              className="h-13 w-full rounded-full px-6 text-base will-change-transform sm:w-auto"
             >
-              {/* Same target as the primary CTA until a separate store-check section exists */}
               <a href="#contact">See what&apos;s costing my store</a>
             </Button>
-          </div>
-
+          </div> 
           {/* Platform strip: reads as a specialization, not a tech list */}
           <div data-fade className="mt-10 border-t border-border pt-6">
             <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
