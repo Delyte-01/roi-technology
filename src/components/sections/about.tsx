@@ -726,7 +726,7 @@ export function Origin() {
               </footer>
             </blockquote>
 
-            <div data-origin-cta className="mt-9">
+            <div data-origin-cta className="mt-9 flex  justify-center items-center">
               <div
                 data-origin-magnetic
                 className="inline-block will-change-transform"

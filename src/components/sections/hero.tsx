@@ -171,7 +171,7 @@ export function Hero() {
         {/* Copy */}
         <div>
           {/* Platform badge: first (and quietest) use of the Shopify green */}
-          <div data-fade className="mb-7">
+          <div data-fade className="mb-7 ">
             <Badge
               variant="outline"
               className="h-auto gap-2 rounded-full border-shopify/40 bg-shopify-soft px-3.5 py-1.5 text-sm font-medium text-shopify"
@@ -181,7 +181,7 @@ export function Hero() {
             </Badge>
           </div>
 
-          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem]">
+          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem] text-center lg:text-left">
             <span className="block overflow-hidden pb-[0.12em]">
               <span data-line className="block will-change-transform">
                 We see what&apos;s
@@ -204,14 +204,17 @@ export function Hero() {
 
           <p
             data-fade
-            className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed"
+            className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed text-center lg:text-left"
           >
             We find hidden problems in your Shopify or WordPress store and fix
             them, from conversion leaks to performance issues, so more visitors
             become customers.
           </p>
 
-          <div data-fade className="mt-10 flex flex-wrap items-center gap-4">
+          <div
+            data-fade
+            className="mt-10 flex flex-wrap justify-center items-center gap-4"
+          >
             <Button
               asChild
               size="lg"

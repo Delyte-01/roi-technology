@@ -28,7 +28,7 @@ function Logo() {
     >
       {/* Put your file in /public, e.g. /public/logo.png (SVG works too) */}
       <Image
-        src="https://res.cloudinary.com/dk5mfu099/image/upload/v1790618021/WhatsApp_Image_2026-09-28_at_7.42.46_AM-removebg-preview_gza7d4.png"
+        src="https://res.cloudinary.com/dk5mfu099/image/upload/v1791353426/roi-mark-green-white-arrow-removebg-preview_bgmhcf.png"
         alt="logo"
         width={56}
         height={56}
@@ -40,8 +40,8 @@ function Logo() {
         <span className="text-xl font-semibold tracking-[-0.03em] uppercase">
           roi<span className="text-primary">technology</span>
         </span>
-        <span className="mt-1 text-[10px] uppercase font-medium tracking-wide text-profit">El-roi .
-          Return on investment
+        <span className="mt-1 text-[10px] uppercase font-medium tracking-wide text-profit">
+          El-roi . Return on investment
         </span>
       </span>
     </a>

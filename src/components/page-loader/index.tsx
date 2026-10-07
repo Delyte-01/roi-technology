@@ -356,7 +356,7 @@ export function PageLoader({
           <Wordmark
             size="lg"
             className="mt-8 items-center text-center"
-            accentClassName="text-violet-400"
+            accentClassName="text-green-400"
           />
         </div>
 
@@ -376,7 +376,7 @@ export function PageLoader({
             </span>
           </div>
 
-          <div className="relative h-5 w-28 overflow-hidden text-right text-xs uppercase tracking-[0.2em] text-violet-300 sm:w-36 sm:text-sm">
+          <div className="relative h-5 w-28 overflow-hidden text-right text-xs uppercase tracking-[0.2em] text-green-300 sm:w-36 sm:text-sm">
             {WORDS.map((w) => (
               <span
                 key={w}
@@ -393,7 +393,7 @@ export function PageLoader({
           data-l-bar-wrap
           className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10"
         >
-          <div data-l-bar className="h-full bg-violet-400" />
+          <div data-l-bar className="h-full bg-green-500" />
         </div>
       </div>
     </div>

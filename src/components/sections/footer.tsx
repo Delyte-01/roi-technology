@@ -11,31 +11,31 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 pt-16 sm:px-6 sm:pt-20">
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
           <div className="max-w-sm">
-           <a
-                 href="#home"
-                 data-header-item
-                 className="flex items-center gap-2.5 rounded-md leading-none outline-offset-4"
-                 aria-label="ROI Technology home"
-               >
-                 {/* Put your file in /public, e.g. /public/logo.png (SVG works too) */}
-                 <Image
-                   src="https://res.cloudinary.com/dk5mfu099/image/upload/v1790618021/WhatsApp_Image_2026-09-28_at_7.42.46_AM-removebg-preview_gza7d4.png"
-                   alt="logo"
-                   width={56}
-                   height={56}
-                   priority
-                   className="size-16  shrink-0 object-contain"
-                 />
-           
-                 <span className="flex flex-col">
-                   <span className="text-xl font-semibold tracking-[-0.03em] uppercase">
-                     roi<span className="text-primary">technology</span>
-                   </span>
-                   <span className="mt-1 text-[10px] uppercase font-medium tracking-wide text-profit">El-roi .
-                     Return on investment
-                   </span>
-                 </span>
-               </a>
+            <a
+              href="#home"
+              data-header-item
+              className="flex items-center gap-2.5 rounded-md leading-none outline-offset-4"
+              aria-label="ROI Technology home"
+            >
+              {/* Put your file in /public, e.g. /public/logo.png (SVG works too) */}
+              <Image
+                src="https://res.cloudinary.com/dk5mfu099/image/upload/v1791353426/roi-mark-green-white-arrow-removebg-preview_bgmhcf.png"
+                alt="logo"
+                width={56}
+                height={56}
+                priority
+                className="size-16  shrink-0 object-contain"
+              />
+
+              <span className="flex flex-col">
+                <span className="text-xl font-semibold tracking-[-0.03em] uppercase">
+                  roi<span className="text-primary">technology</span>
+                </span>
+                <span className="mt-1 text-[10px] uppercase font-medium tracking-wide text-profit">
+                  El-roi . Return on investment
+                </span>
+              </span>
+            </a>
             <p className="mt-4 text-pretty text-sm leading-relaxed text-white/70">
               {site.description}
             </p>

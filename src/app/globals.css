@@ -10,27 +10,43 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
+  /* Main brand colors */
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-destructive: var(--destructive);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Brand extras: profit (emerald) and leak (rose) */
+
+  /* Brand extras */
   --color-profit: var(--profit);
   --color-profit-soft: var(--profit-soft);
   --color-profit-foreground: var(--profit-foreground);
+
+  /* Leak / problem colors */
   --color-leak: var(--leak);
   --color-leak-soft: var(--leak-soft);
+
+  /* Deep brand green */
   --color-brand-deep: var(--brand-deep);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -40,6 +56,7 @@
   --font-sora: var(--font-sora);
   --font-inter: var(--font-inter);
 
+  /* Shopify-specific colors */
   --color-shopify: var(--shopify);
   --color-shopify-deep: var(--shopify-deep);
   --color-shopify-soft: var(--shopify-soft);
@@ -48,68 +65,147 @@
 :root {
   --radius: 0.75rem;
 
-  /* Light theme, purple primary */
-  --background: #faf9ff;
-  --foreground: #1e1b2e;
-  --card: #ffffff;
-  --card-foreground: #1e1b2e;
-  --popover: #ffffff;
-  --popover-foreground: #1e1b2e;
-  --primary: #7c3aed;
-  --primary-foreground: #ffffff;
-  --secondary: #f1ecff;
-  --secondary-foreground: #4c1d95;
-  --muted: #f5f1ff;
-  --muted-foreground: #6b6a80;
-  --accent: #ede9fe;
-  --accent-foreground: #4c1d95;
-  --destructive: #e11d48;
-  --border: #e7e1fb;
-  --input: #ddd5f7;
-  --ring: #a78bfa;
+  /*
+   * ==========================================
+   * ROI TECHNOLOGY BRAND COLORS
+   * ==========================================
+   *
+   * Primary brand: #1DB954
+   * Deep brand:    #0B3D24
+   *
+   * Purple has been replaced with green as
+   * the primary ROI Technology brand color.
+   */
 
-  /* Secondary brand color: emerald = profit. Rose = leak. */
-  --profit: #047857;
-  --profit-soft: #d1fae5;
+  /* Main page */
+  --background: #f8faf9;
+  --foreground: #17201b;
+
+  /* Cards */
+  --card: #ffffff;
+  --card-foreground: #17201b;
+
+  /* Popovers */
+  --popover: #ffffff;
+  --popover-foreground: #17201b;
+
+  /* ==========================================
+   * PRIMARY BRAND
+   * ========================================== */
+
+  --primary: #1DB954;
+  --primary-foreground: #ffffff;
+
+  /* ==========================================
+   * SECONDARY
+   * ========================================== */
+
+  --secondary: #eaf8ef;
+  --secondary-foreground: #15803d;
+
+  /* ==========================================
+   * MUTED
+   * ========================================== */
+
+  --muted: #f1f5f2;
+  --muted-foreground: #647067;
+
+  /* ==========================================
+   * ACCENT
+   * ========================================== */
+
+  --accent: #dcfce7;
+  --accent-foreground: #166534;
+
+  /* ==========================================
+   * DESTRUCTIVE / ERROR
+   * ========================================== */
+
+  --destructive: #e11d48;
+
+  /* ==========================================
+   * BORDERS / INPUTS
+   * ========================================== */
+
+  --border: #e1e8e3;
+  --input: #d5dfd8;
+
+  /* Focus ring follows brand */
+  --ring: #1DB954;
+
+  /* ==========================================
+   * PROFIT
+   * ========================================== */
+
+  --profit: #15803d;
+  --profit-soft: #dcfce7;
   --profit-foreground: #ffffff;
+
+  /* ==========================================
+   * LEAK / PROBLEM
+   * ========================================== */
+
   --leak: #be123c;
   --leak-soft: #ffe4e6;
-  --brand-deep: #1e1147;
 
+  /* ==========================================
+   * DEEP BRAND GREEN
+   * ========================================== */
 
-  /* in :root */
-/* Platform accent: Shopify/ecommerce labeling only. Never for primary UI. */
---shopify: #95bf47;       /* bright, for dark purple backgrounds */
---shopify-deep: #4f7a28;  /* darker, for text/icons on light backgrounds */
---shopify-soft: #f0f7e0;  /* badge/tint backgrounds */
+  --brand-deep: #0b3d24;
+
+  /* ==========================================
+   * SHOPIFY COLORS
+   * ==========================================
+   *
+   * These remain separate from ROI's main
+   * green so Shopify-related elements can
+   * have their own visual identity.
+   */
+
+  --shopify: #95bf47;
+  --shopify-deep: #4f7a28;
+  --shopify-soft: #f0f7e0;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   html {
     scroll-behavior: auto;
   }
+
   body {
     @apply bg-background text-foreground antialiased font-inter;
   }
 }
 
-/* Lenis recommended styles */
+/* ==========================================
+   LENIS SMOOTH SCROLL
+   ========================================== */
+
 html.lenis,
 html.lenis body {
   height: auto;
 }
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
+
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
+
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
 
 h1,
 h2,

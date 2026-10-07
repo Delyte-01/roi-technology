@@ -352,7 +352,7 @@ export function Results() {
         {/* Closing CTA */}
         <div
           data-results-cta
-          className="mt-16 flex flex-col items-start justify-between gap-6 border-t pt-10 sm:flex-row sm:items-center lg:mt-20"
+          className="mt-16 flex flex-col  justify-center md:justify-between gap-6 border-t pt-10 sm:flex-row items-center lg:mt-20"
         >
           <p className="text-xl font-semibold tracking-tight sm:text-2xl">
             Your store could be next.
@@ -360,7 +360,7 @@ export function Results() {
           <Button
             asChild
             size="lg"
-            className="group/cta h-14 rounded-full px-8 text-base"
+            className="group/cta h-14 rounded-full px-8 text-base "
           >
             <a href="#contact">
               Get my free store check

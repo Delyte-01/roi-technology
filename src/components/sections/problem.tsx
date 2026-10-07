@@ -274,7 +274,7 @@ export function Problem() {
               </ul>
             </div>
 
-            <div data-cta-item data-magnetic className="will-change-transform">
+            <div data-cta-item data-magnetic className="will-change-transform flex items-center justify-center sm:items-start sm:justify-start">
               <Button
                 asChild
                 variant="secondary"

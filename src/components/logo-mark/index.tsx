@@ -63,7 +63,15 @@ type LogoMarkProps = SVGProps<SVGSVGElement> & {
   arrowColor?: string;
 };
 
-export function LogoMark({ arrowColor = "#FAFAFA", ...props }: LogoMarkProps) {
+
+
+export const LOGO_GREEN = "#1FB855";
+
+export function LogoMark({
+  arrowColor = "#FAFAFA",
+  color = LOGO_GREEN,
+  ...props
+}: LogoMarkProps) {
   const maskId = `roi-arrow-${useId().replace(/:/g, "")}`;
 
   return (
@@ -75,7 +83,6 @@ export function LogoMark({ arrowColor = "#FAFAFA", ...props }: LogoMarkProps) {
       {...props}
     >
       <defs>
-        {/* Spine of the arrow. Animating its dash offset wipes the arrow in along its curve. */}
         <mask
           id={maskId}
           maskUnits="userSpaceOnUse"
@@ -101,14 +108,14 @@ export function LogoMark({ arrowColor = "#FAFAFA", ...props }: LogoMarkProps) {
         data-logo-part
         data-logo-wing="left"
         pathLength={1}
-        fill="#582896"
+        fill={color}
         d={WING_LEFT}
       />
       <path
         data-logo-part
         data-logo-wing="right"
         pathLength={1}
-        fill="#7848B8"
+        fill={color}
         d={WING_RIGHT}
       />
 
@@ -118,7 +125,7 @@ export function LogoMark({ arrowColor = "#FAFAFA", ...props }: LogoMarkProps) {
           data-logo-part
           data-logo-blade
           pathLength={1}
-          fill={b.fill}
+          fill={color}
           d={b.d}
         />
       ))}
